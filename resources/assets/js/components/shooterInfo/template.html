@@ -1,0 +1,100 @@
+
+<tabs-nrai ></tabs-nrai>
+<div    class=""
+        v-if="$loadingRouteData"
+        >
+
+    <div class="center-align card-panel">
+        <br><br>
+        <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+            </div>
+
+            <div class="spinner-layer spinner-red">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+            </div>
+
+            <div class="spinner-layer spinner-yellow">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+            </div>
+
+            <div class="spinner-layer spinner-green">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+            </div>
+        </div>
+        <h2 class=''>Loading...</h2>
+    </div>
+
+
+</div>
+<div class="row z-depth-1"
+        v-if="!$loadingRouteData"
+        >
+        <div class="row ">
+            <div class="col center">
+                <h5 class="indigo-text">Please confirm your Identity</h5>
+            </div>
+
+        </div>
+
+        <div class="">
+            <div class="col s2 ">
+                <img v-attr="src : '/api/athletePhoto/'+ $route.params.nraiID" class="responsive-img">
+            </div>
+
+            <div class="col s8 offset-s2">
+                <table class="striped hoverable ">
+                    <thead>
+                    <th>Data</th>
+                    <th>Value</th>
+                    </thead>
+                    <tbody>
+                    <tr v-repeat="athleteInfo" >
+                        <td>{{$key}}</td>
+                        <td>{{$value | uppercase }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    <div class="row">
+        <div class="right-align col s12">
+            <button class="btn indigo waves-effect waves-light" type="submit" name="action">Continue
+                <i class="material-icons">trending_flat</i>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<p class="h3">In case of any changes please contact NRAI</p>
+<p>Current route params: {{$route.params.nraiID | json}}</p>
+<p>Current route params: {{nraiID | json}}</p>
+<p>Current route params: {{message | json}}</p>
+<p></p>

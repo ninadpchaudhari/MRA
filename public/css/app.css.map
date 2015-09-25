@@ -1,0 +1,1 @@
+{"version":3,"sources":["app.scss"],"names":[],"mappings":"AAEA;EACE,YAAa;EACb,WAAY,EAFE","file":"app.css","sourcesContent":["// @import \"node_modules/bootstrap-sass/assets/stylesheets/bootstrap\";\n\n.logo-container{\n  height : 50%;\n  width : 50%;\n}\n"],"sourceRoot":"/source/"}

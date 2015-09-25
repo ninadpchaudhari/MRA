@@ -1,0 +1,46 @@
+
+<div  id="first-page" >
+    <div class="row"></div>
+
+    <div class="row">
+        <div class="input-field col s6">
+            <!--<form action="#" id="firstPageNraiID"></form>-->
+            <input type="text" id="nrai-id-field" length="13"
+                   v-class="invalid : nraiIDIsInvalid,
+                            validate : true"
+                   v-model="nraiID | uppercase"
+                   v-on="keyup: redirectToAthleteInfo | key  'enter'"
+                    >
+            <label for="nrai-id-field"> Enter Your Nrai ID card</label>
+        </div>
+        <div class="col s3">
+            <a class="waves-effect waves-light btn pink"
+               v-on="click : redirectToAthleteInfo"
+                    ><i class="material-icons right">send</i>Continue</a>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col s12">For Mavlankar Shooters</div>
+    </div>
+    <div class="row">
+        <div class="input-field col s6">
+            <input type="text" id="competitor-id-field">
+            <label for="competitor-id-field">Enter Your Mavlankar competitor ID</label>
+        </div>
+        <div class="col s3">
+            <a class="waves-effect waves-light btn pink"><i class="material-icons right">send</i>Continue</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s6">
+            <div id="el">
+                <p>Selected: {{selected}}</p>
+                <select v-select="selected" options="options" multiple>
+                    <option value="0">default</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>

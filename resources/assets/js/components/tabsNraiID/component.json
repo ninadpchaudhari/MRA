@@ -1,0 +1,6 @@
+{
+  "name" : "firstPage",
+  "scripts" : ["index.js"],
+  "templates" : ["template.html"]
+
+}
