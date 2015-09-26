@@ -138,8 +138,17 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         //Debugger
         Barryvdh\Debugbar\ServiceProvider::class,
+        //HTML Forms
         Collective\Html\HtmlServiceProvider::class,
+        //IDE Helper
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        //Flash Messages
+        Laracasts\Flash\FlashServiceProvider::class,
+        // OLD PDF =>Fall back option if the snappy cant be setup as snappy requires binary depedency in composer
+        //https://github.com/barryvdh/laravel-dompdf
+        //Barryvdh\DomPDF\ServiceProvider::class,
+        Barryvdh\Snappy\ServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -148,7 +157,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         //Intervention Image manipulation
-        'Intervention\Image\ImageServiceProvider',
+        'Intervention\Image\ImageServiceProvider'
 
     ],
 
@@ -200,9 +209,14 @@ return [
         'Image' => 'Intervention\Image\Facades\Image',
         //Debugger
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        //HTML and Forms Laravel Collective
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-
+        //Laracast / Flash messages
+        'Flash' => Laracasts\Flash\Flash::class,
+        //OLD PDF
+        //'PDF' => Barryvdh\DomPDF\Facade::class,
+        'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class
     ],
 
 ];

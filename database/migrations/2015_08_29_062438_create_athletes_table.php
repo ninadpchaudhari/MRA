@@ -17,7 +17,7 @@ class CreateAthletesTable extends Migration
             Schema::create('athletes', function (Blueprint $table) {
                 $table->increments('id')->unsigned();
                 $table->integer('cardNo')->unsigned()->nullable();
-                $table->string('shooterID')->nllable();
+                $table->string('shooterID')->nullable();
                 $table->integer('idCount')->unsigned()->nullable();
                 $table->string('shooterName');
                 $table->string('motherName')->nllable();

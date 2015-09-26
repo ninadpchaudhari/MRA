@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Laracasts\Flash\Flash;
 
 class athletesController extends Controller
 {
@@ -15,9 +16,11 @@ class athletesController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        if($request->match_id == null ) return Athlete::all();
+        
     }
 
     /**
@@ -28,6 +31,7 @@ class athletesController extends Controller
     public function create()
     {
         //
+        return view('athletes.create');
     }
 
     /**
@@ -39,6 +43,16 @@ class athletesController extends Controller
     public function store(Request $request)
     {
         //
+        \App\Athlete::unguard();
+        $athlete  = \App\Athlete::create($request->except(['_method', '_token']));
+        \App\Athlete::reguard();
+
+        if($athlete != null){
+            Flash::message("{$athlete->shooterName} was added successfully");
+            return redirect()->action('athletesController@create');
+        }
+
+
     }
 
     /**

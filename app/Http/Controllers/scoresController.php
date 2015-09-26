@@ -16,11 +16,15 @@ class scoresController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $scores = Score::all();
-        return $scores;
+        if($request->match_id == null ) return Score::all();
+        $match = \App\Match::findOrFail($request->match_id);
+        $event_ids = \App\Event::where('match_id',$request->match_id);
+        $scores = \App\Score::whereIn('event_id',$event_ids);
+        return view('scores.index',compact('scores','match'));
+
     }
 
     /**
@@ -32,14 +36,14 @@ class scoresController extends Controller
     public function create(Request $request)
     {
         //
+
         if($request->athlete_id == null){
             return  view('scores.get_athlete_id');
         }
         else
         {
             $athlete = Athlete::findOrFail($request->athlete_id);
-            $scores = $athlete->scores;
-            return $scores;
+            return view('scores.create');
 
         }
 

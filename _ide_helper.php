@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.1.17 (LTS) on 2015-09-25.
+ * Generated for Laravel 5.1.17 (LTS) on 2015-09-26.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -13173,6 +13173,235 @@ namespace {
          */
         public static function hasMacro($name){
             return \Collective\Html\HtmlBuilder::hasMacro($name);
+        }
+        
+    }
+
+
+    class Flash extends \Laracasts\Flash\Flash{
+        
+        /**
+         * Flash an information message.
+         *
+         * @param string $message
+         * @static 
+         */
+        public static function info($message){
+            return \Laracasts\Flash\FlashNotifier::info($message);
+        }
+        
+        /**
+         * Flash a success message.
+         *
+         * @param string $message
+         * @return $this 
+         * @static 
+         */
+        public static function success($message){
+            return \Laracasts\Flash\FlashNotifier::success($message);
+        }
+        
+        /**
+         * Flash an error message.
+         *
+         * @param string $message
+         * @return $this 
+         * @static 
+         */
+        public static function error($message){
+            return \Laracasts\Flash\FlashNotifier::error($message);
+        }
+        
+        /**
+         * Flash a warning message.
+         *
+         * @param string $message
+         * @return $this 
+         * @static 
+         */
+        public static function warning($message){
+            return \Laracasts\Flash\FlashNotifier::warning($message);
+        }
+        
+        /**
+         * Flash an overlay modal.
+         *
+         * @param string $message
+         * @param string $title
+         * @return $this 
+         * @static 
+         */
+        public static function overlay($message, $title = 'Notice'){
+            return \Laracasts\Flash\FlashNotifier::overlay($message, $title);
+        }
+        
+        /**
+         * Flash a general message.
+         *
+         * @param string $message
+         * @param string $level
+         * @return $this 
+         * @static 
+         */
+        public static function message($message, $level = 'info'){
+            return \Laracasts\Flash\FlashNotifier::message($message, $level);
+        }
+        
+        /**
+         * Add an "important" flash to the session.
+         *
+         * @return $this 
+         * @static 
+         */
+        public static function important(){
+            return \Laracasts\Flash\FlashNotifier::important();
+        }
+        
+    }
+
+
+    class PDF extends \Barryvdh\Snappy\Facades\SnappyPdf{
+        
+        /**
+         * Get the Snappy instance.
+         *
+         * @return \Knp\Snappy\Pdf 
+         * @static 
+         */
+        public static function snappy(){
+            return \Barryvdh\Snappy\PdfWrapper::snappy();
+        }
+        
+        /**
+         * Set the paper size (default A4)
+         *
+         * @param string $paper
+         * @param string $orientation
+         * @return $this 
+         * @static 
+         */
+        public static function setPaper($paper, $orientation = null){
+            return \Barryvdh\Snappy\PdfWrapper::setPaper($paper, $orientation);
+        }
+        
+        /**
+         * Set the orientation (default portrait)
+         *
+         * @param string $orientation
+         * @return static 
+         * @static 
+         */
+        public static function setOrientation($orientation){
+            return \Barryvdh\Snappy\PdfWrapper::setOrientation($orientation);
+        }
+        
+        /**
+         * Show or hide warnings
+         *
+         * @param bool $warnings
+         * @return $this 
+         * @deprecated 
+         * @static 
+         */
+        public static function setWarnings($warnings){
+            return \Barryvdh\Snappy\PdfWrapper::setWarnings($warnings);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function setOption($name, $value){
+            return \Barryvdh\Snappy\PdfWrapper::setOption($name, $value);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function setOptions($options){
+            return \Barryvdh\Snappy\PdfWrapper::setOptions($options);
+        }
+        
+        /**
+         * Load a HTML string
+         *
+         * @param string $string
+         * @return static 
+         * @static 
+         */
+        public static function loadHTML($string){
+            return \Barryvdh\Snappy\PdfWrapper::loadHTML($string);
+        }
+        
+        /**
+         * Load a HTML file
+         *
+         * @param string $file
+         * @return static 
+         * @static 
+         */
+        public static function loadFile($file){
+            return \Barryvdh\Snappy\PdfWrapper::loadFile($file);
+        }
+        
+        /**
+         * Load a View and convert to HTML
+         *
+         * @param string $view
+         * @param array $data
+         * @param array $mergeData
+         * @return static 
+         * @static 
+         */
+        public static function loadView($view, $data = array(), $mergeData = array()){
+            return \Barryvdh\Snappy\PdfWrapper::loadView($view, $data, $mergeData);
+        }
+        
+        /**
+         * Output the PDF as a string.
+         *
+         * @return string The rendered PDF as string
+         * @throws \InvalidArgumentException
+         * @static 
+         */
+        public static function output(){
+            return \Barryvdh\Snappy\PdfWrapper::output();
+        }
+        
+        /**
+         * Save the PDF to a file
+         *
+         * @param $filename
+         * @return static 
+         * @static 
+         */
+        public static function save($filename){
+            return \Barryvdh\Snappy\PdfWrapper::save($filename);
+        }
+        
+        /**
+         * Make the PDF downloadable by the user
+         *
+         * @param string $filename
+         * @return \Barryvdh\Snappy\Response 
+         * @static 
+         */
+        public static function download($filename = 'document.pdf'){
+            return \Barryvdh\Snappy\PdfWrapper::download($filename);
+        }
+        
+        /**
+         * Return a response with the PDF to show in the browser
+         *
+         * @param string $filename
+         * @return \Barryvdh\Snappy\StreamedResponse 
+         * @static 
+         */
+        public static function stream($filename = 'document.pdf'){
+            return \Barryvdh\Snappy\PdfWrapper::stream($filename);
         }
         
     }

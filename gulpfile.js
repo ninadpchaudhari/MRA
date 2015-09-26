@@ -15,7 +15,8 @@ elixir(function(mix) {
 
     mix.styles([
         'normalize.css',
-        'materialize.min.css'
+        'materialize.min.css',
+        'handsontable.full.css'
     ],'public/css/vendor.css');
     mix.browserify('app.js');
     mix.browserify('admin.js');
@@ -27,13 +28,15 @@ elixir(function(mix) {
         'vendor/vue.js',
         'vendor/vue-router.min.js',
         'vendor/vue-resource.js',
-        'vendor/select2-4.0.0.min.js'
+        'vendor/select2-4.0.0.min.js',
+        'vendor/handsontable.full.js'
     ],'public/js/vendor.js');
     mix.scripts([
         'vendor/modernizr-2.8.3.min.js',
         'vendor/jquery-1.11.3.min.js',
         'vendor/materialize.min.js',
-        'vendor/select2-4.0.0.min.js'
+        'vendor/select2-4.0.0.min.js',
+        'vendor/handsontable.full.js'
     ],'public/js/vendor-no-vue.js');
 
     mix.sass('app.scss');

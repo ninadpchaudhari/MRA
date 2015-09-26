@@ -31,9 +31,9 @@ Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::resource('matches','matchesController');
-Route::get('events/match/{match_id}','eventsController@matchIndex');
 Route::resource('events','eventsController');
 Route::resource('scores','scoresController');
+Route::resource('athletes','athletesController');
 //Route::resource('events','eventsController');
 
 Route::group(['prefix' => 'admin'],function(){
@@ -50,3 +50,14 @@ Route::group(['prefix' => 'admin'],function(){
     return $img->response("jpg");
 });
 */
+Route::get('letterhead',function(){
+    set_time_limit(0);
+    //return view('phpinfo');
+   return PDF::loadFile(storage_path('app/index.htm'))->stream('download.pdf');
+
+    //return PDF::loadFile('http://www.github.com')->download('github.pdf');
+    //return PDF::loadHTML('<h1>HI</h1>')->download('hi.pdf');
+    //$pdf = App::make('snappy.pdf.wrapper');
+    //$pdf->loadHTML('<h1>Test</h1>');
+    //return $pdf->stream();
+});

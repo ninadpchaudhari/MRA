@@ -103,8 +103,10 @@ class Event extends Model
                     'Junior',
                     'Youth',
                     'Handicapped',
-                    'Vetrian',
-                    'Services'
+                    'Veterans',
+                    'Services',
+                    'Junior Services',
+                    'MQS'
                 ),
                 ('nat_civil') => Array(
                     'National',

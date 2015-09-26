@@ -12,7 +12,11 @@
     <div class="row">
         <a href="{{action('matchesController@edit',['id' => $match->id])}}"
            class="btn btn-default">
-            Edit
+            Edit Match
+        </a>
+        <a href="{{action('matchesController@edit',['id' => $match->id])}}"
+           class="btn btn-default">
+            All Shooters
         </a>
     </div>
 <br>
