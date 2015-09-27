@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class scoresController extends Controller
 {
@@ -16,17 +17,36 @@ class scoresController extends Controller
      *
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
         //
-        if($request->match_id == null ) return Score::all();
-        $match = \App\Match::findOrFail($request->match_id);
-        $event_ids = \App\Event::where('match_id',$request->match_id);
-        $scores = \App\Score::whereIn('event_id',$event_ids);
-        return view('scores.index',compact('scores','match'));
+        return Score::all();
 
     }
 
+    public function indexForMatchAndClass($class_id,$match_id){
+        $class = \App\Event::decodeArray()['classes'][$class_id];
+        return DB::table('scores')
+            ->join('events',function($join) use ($class , $match_id){
+                $join->on('scores.event_id','=','events.id')
+                    ->where('events.class','=',$class)
+                    ->where('events.match_id','=',$match_id);
+            })
+            ->groupBy('athlete_id')
+            ->get()
+            ->toJson();
+    }
+    /**
+     * Gives all the scores of a match
+     * @param $match_id
+     * @return \Illuminate\View\View
+     */
+    public function indexForMatch($match_id,Request $request){
+        $classes = \App\Event::decodeArray()['classes'];
+        $match = \App\Match::findOrFail($match_id);
+        return view('scores.indexForMatch',compact('match','classes'));
+
+    }
     /**
      * Show the form for creating a new resource.
      *

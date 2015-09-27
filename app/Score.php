@@ -11,7 +11,7 @@ class Score extends Model
     protected $fillable =['match_id','event_id'];
 
     public function athlete(){
-        return $this->belongsTo('App\Athlete','athlete_id','athlete_id');
+        return $this->belongsTo('App\Athlete');
     }
     public function event(){
         return $this->belongsTo('App\Event');

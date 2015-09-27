@@ -30,6 +30,8 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
+Route::get('scores/match_id/{match_id}','scoresController@indexForMatch');
+Route::get('scores/match_id/{match_id}/class_id/{class_id}','scoresController@indexForMatchAndClass');
 Route::resource('matches','matchesController');
 Route::resource('events','eventsController');
 Route::resource('scores','scoresController');
