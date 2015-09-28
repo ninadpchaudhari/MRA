@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4ef5d8caa14a07b1ec059d5e05ae65ad",
+    "hash": "b083e85909fc510f25994760084623d4",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -1174,7 +1174,7 @@
                     "name": "Jeremy Lindblom",
                     "email": "jeremeamia@gmail.com",
                     "homepage": "https://github.com/jeremeamia",
-                    "role": "Developer"
+                    "role": "developer"
                 }
             ],
             "description": "Serialize Closure objects, including their context and binding",
