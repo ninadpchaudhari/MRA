@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+
 //use Illuminate\Support\Facades\Schema;
 
 class CreateAthletesTable extends Migration
@@ -13,7 +14,7 @@ class CreateAthletesTable extends Migration
      */
     public function up()
     {
-        if( ! Schema::hasTable('athletes')) {
+        if (!Schema::hasTable('athletes')) {
             Schema::create('athletes', function (Blueprint $table) {
                 $table->increments('id')->unsigned();
                 $table->integer('cardNo')->unsigned()->nullable();

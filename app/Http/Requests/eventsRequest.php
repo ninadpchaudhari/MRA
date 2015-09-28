@@ -25,7 +25,7 @@ class eventsRequest extends Request
     {
         return [
             //
-            'match_id' => ['required','integer'],
+            'match_id' => ['required', 'integer'],
             'name' => ['required'],
             'class' => ['required'],
             'type' => ['required'],

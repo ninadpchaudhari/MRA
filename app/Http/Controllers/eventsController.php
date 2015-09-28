@@ -20,145 +20,147 @@ class eventsController extends Controller
      */
 
     // Gives types and classes which player has played match earlier in 2 years
-    public function getPlayableClassType($shooterID,$matchYear){
+    public function getPlayableClassType($shooterID, $matchYear)
+    {
         $playableArray['types'] = Array();
         $playableArray['classes'] = Array();
         $minYear = $matchYear - 2;
-        $eventTypeClass=
+        $eventTypeClass =
             DB::table('scores')
-                ->select('events.type','events.class')
-                ->join('events', 'events.id','=','scores.event_id')
-                ->join('matches',function($join) use ($minYear) {
-                    $join->on('events.match_id','=','matches.id')
-                        ->where('matches.year','>=',$minYear);
+                ->select('events.type', 'events.class')
+                ->join('events', 'events.id', '=', 'scores.event_id')
+                ->join('matches', function ($join) use ($minYear) {
+                    $join->on('events.match_id', '=', 'matches.id')
+                        ->where('matches.year', '>=', $minYear);
                 })
                 ->where(['scores.shooterID' => $shooterID])
                 ->distinct()
                 ->get();
 
-        foreach($eventTypeClass as $eventTypeClass_1) {
-           $playableArray['types'][] = $eventTypeClass_1->type;
-           $playableArray['classes'][] = $eventTypeClass_1->class;
-        }
-
-        return $playableArray;
-    }
-    public function getPlayableClass($shooterID,$matchYear){
-
-        $playableArray['classes'] = Array();
-        $minYear = $matchYear - 2;
-        $eventTypeClass=
-            DB::table('scores')
-                ->select('events.class')
-                ->join('events', 'events.id','=','scores.event_id')
-                ->join('matches',function($join) use ($minYear) {
-                    $join->on('events.match_id','=','matches.id')
-                        ->where('matches.year','>=',$minYear);
-                })
-                ->where(['scores.shooterID' => $shooterID])
-                ->distinct()
-                ->get();
-
-        foreach($eventTypeClass as $eventTypeClass_1) {
+        foreach ($eventTypeClass as $eventTypeClass_1) {
+            $playableArray['types'][] = $eventTypeClass_1->type;
             $playableArray['classes'][] = $eventTypeClass_1->class;
         }
 
         return $playableArray;
     }
-    public function getPlayableGender($athleteSex){
+
+    public function getPlayableClass($shooterID, $matchYear)
+    {
+
+        $playableArray['classes'] = Array();
+        $minYear = $matchYear - 2;
+        $eventTypeClass =
+            DB::table('scores')
+                ->select('events.class')
+                ->join('events', 'events.id', '=', 'scores.event_id')
+                ->join('matches', function ($join) use ($minYear) {
+                    $join->on('events.match_id', '=', 'matches.id')
+                        ->where('matches.year', '>=', $minYear);
+                })
+                ->where(['scores.shooterID' => $shooterID])
+                ->distinct()
+                ->get();
+
+        foreach ($eventTypeClass as $eventTypeClass_1) {
+            $playableArray['classes'][] = $eventTypeClass_1->class;
+        }
+
+        return $playableArray;
+    }
+
+    public function getPlayableGender($athleteSex)
+    {
         $playableArray = Array();
         //Common events can always be played
         $playableArray[] = 'Common';
 
-        if(strcmp($athleteSex,'MEN') == 0){
+        if (strcmp($athleteSex, 'MEN') == 0) {
             $playableArray[] = 'Men';
-        }
-        elseif(strcmp($athleteSex,'WOMEN') == 0){
+        } elseif (strcmp($athleteSex, 'WOMEN') == 0) {
             $playableArray[] = 'Women';
-        }
-        else dd('Error in getting PlayableGender'.$playableArray);
+        } else dd('Error in getting PlayableGender' . $playableArray);
         return $playableArray;
     }
-    public function getPlayableCategories($athlete,$match){
 
-        $age = abs($match->year - $athlete->DOB->year) ;
-        if($age > 150 || $age < 10)
-        {
+    public function getPlayableCategories($athlete, $match)
+    {
+
+        $age = abs($match->year - $athlete->DOB->year);
+        if ($age > 150 || $age < 10) {
             echo "Age Out of Bounds -- from Controller";
             dd($age);
         }
         $playableArray['categories'] = \App\Event::decodeArray()['categories'];
 
-        if($age > 21) {
+        if ($age > 21) {
             //Senior Category Player
-            return array_diff($playableArray['categories'],array('Junior','Youth'));
-        }elseif($age < 21 && $age >18){
+            return array_diff($playableArray['categories'], array('Junior', 'Youth'));
+        } elseif ($age < 21 && $age > 18) {
             //Junior Category Player
-            return array_diff($playableArray['categories'],array('Youth'));
-        }elseif($age<18){
+            return array_diff($playableArray['categories'], array('Youth'));
+        } elseif ($age < 18) {
             //Youth Category Player
             return $playableArray['categories']; // no change
         }
 
     }
-    public function getMaxIssfScore($shooterID,$match){
+
+    public function getMaxIssfScore($shooterID, $match)
+    {
         $minYear = $match->year - 2;
-        $matchesIDs= DB::table('matches')
+        $matchesIDs = DB::table('matches')
             ->select('matches.id')
-            ->where('matches.id','>=',$minYear)
+            ->where('matches.id', '>=', $minYear)
             ->get();
         $selectedMatches = Array();
-        foreach($matchesIDs as $matchesID ){
+        foreach ($matchesIDs as $matchesID) {
             $selectedMatches[] = $matchesID->id;
         }
         //dd($selectedMatches);
         $maxIssfScore = DB::table('scores')
-
-            ->join('events',function($join) use($minYear,$selectedMatches){
-                $join->on('events.id','=','scores.event_id')
-                    ->where('events.consider_for_qualification','=',1)
-                    ->whereIn('events.match_id',$selectedMatches);
+            ->join('events', function ($join) use ($minYear, $selectedMatches) {
+                $join->on('events.id', '=', 'scores.event_id')
+                    ->where('events.consider_for_qualification', '=', 1)
+                    ->whereIn('events.match_id', $selectedMatches);
 
 
             })
-
-            ->where('scores.shooterID',$shooterID)
-
-            ->max('scores.score');
-
-        ;
+            ->where('scores.shooterID', $shooterID)
+            ->max('scores.score');;
         dd($maxIssfScore);
         return $maxIssfScore;
 
     }
+
     public function athleteCompatibleEvents($match_id, $shooterID)
     {
-        $shooterID = (string) $shooterID;
+        $shooterID = (string)$shooterID;
         $athlete = \App\Athlete::where('shooterID', $shooterID)->first();
         $match = \App\Match::findOrFail($match_id);
 
         //setting types and classes
         $playableArray = Array();
 
-        $playableArray = $this->getPlayableClass($shooterID,$match->year); // as 2 keys, the function itself returns keys value pairs
+        $playableArray = $this->getPlayableClass($shooterID, $match->year); // as 2 keys, the function itself returns keys value pairs
         $playableArray['types'] = \App\Event::decodeArray()['types'];
-        $playableArray['categories'] = $this->getPlayableCategories($athlete,$match);
+        $playableArray['categories'] = $this->getPlayableCategories($athlete, $match);
         $playableArray['genders'] = $this->getPlayableGender($athlete->sex);
         $playableArray['nat_civil'] = \App\Event::decodeArray()['nat_civil'];
         dd($playableArray);
         //$playableArray['max_issf_score'] = $this->getMaxIssfScore($shooterID,$match,$playableArray['']);
         $compatibleEvents =
-        DB::table('events')
-            ->select('events.*')
-        ->where('match_id','=',$match_id)
-        ->whereIn('class',$playableArray['classes'])
-        ->whereIn('type',$playableArray['types'])
-        ->whereIn('gender',$playableArray['genders'])
-        ->whereIn('nat_civil',$playableArray['nat_civil'])
-        ->whereIn('category',$playableArray['categories'])
-            ->get();
+            DB::table('events')
+                ->select('events.*')
+                ->where('match_id', '=', $match_id)
+                ->whereIn('class', $playableArray['classes'])
+                ->whereIn('type', $playableArray['types'])
+                ->whereIn('gender', $playableArray['genders'])
+                ->whereIn('nat_civil', $playableArray['nat_civil'])
+                ->whereIn('category', $playableArray['categories'])
+                ->get();
         return $compatibleEvents;
-        foreach($compatibleEvents as $compatibleEvent){
+        foreach ($compatibleEvents as $compatibleEvent) {
 
         }
 
@@ -180,10 +182,12 @@ class eventsController extends Controller
 
     }
 
-    public function index(){
+    public function index()
+    {
         $events = \App\Event::all();
-        return view('matches._event_list',compact('events'));
+        return view('matches._event_list', compact('events'));
     }
+
     public function matchIndex($match_id)
     {
         //
@@ -220,7 +224,7 @@ class eventsController extends Controller
     {
         //
         //app('debugbar')->info($request->all());
-        if(!$request->has('isDecimal')){
+        if (!$request->has('isDecimal')) {
             $request->merge(['isDecimal' => false]);
         } else $request->merge(['isDecimal' => true]);
 
@@ -252,7 +256,7 @@ class eventsController extends Controller
         $event = \App\Event::findOrFail($id);
         $decodeArray = \App\Event::decodeArray();
 
-        return view('events.edit',compact('event','decodeArray'));
+        return view('events.edit', compact('event', 'decodeArray'));
     }
 
     /**
@@ -262,10 +266,10 @@ class eventsController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function update( $id,Requests\eventsRequest $request)
+    public function update($id, Requests\eventsRequest $request)
     {
         //
-        if(!$request->has('isDecimal')){
+        if (!$request->has('isDecimal')) {
             $request->merge(['isDecimal' => false]);
         } else $request->merge(['isDecimal' => true]);
 

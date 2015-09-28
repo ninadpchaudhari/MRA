@@ -19,8 +19,8 @@ class CreateScoresTable extends Migration
             $table->boolean('inTeam')->default(false);
             //$table->boolean('isWildCard');
             $table->integer('event_id')->unsigned();
-            $table->decimal('score',5,2)->nullable();
-            $table->decimal('final_score',5,2)->nullable(); // Finals score (not total)
+            $table->decimal('score', 5, 2)->nullable();
+            $table->decimal('final_score', 5, 2)->nullable(); // Finals score (not total)
             $table->integer('representing_unit')->unsigned();
             //$table->integer('verified_by_unit')->unsigned(); // 2=>By Nrai 1=>By state 0=>No
             //$table->string('rank')->nullable();

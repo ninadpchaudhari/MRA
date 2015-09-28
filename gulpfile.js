@@ -11,13 +11,13 @@ var elixir = require('laravel-elixir');
  |
  */
 
-elixir(function(mix) {
+elixir(function (mix) {
 
     mix.styles([
         'normalize.css',
         'materialize.min.css',
         'handsontable.full.css'
-    ],'public/css/vendor.css');
+    ], 'public/css/vendor.css');
     mix.browserify('app.js');
     mix.browserify('admin.js');
 
@@ -30,20 +30,20 @@ elixir(function(mix) {
         'vendor/vue-resource.js',
         'vendor/select2-4.0.0.min.js',
         'vendor/handsontable.full.js'
-    ],'public/js/vendor.js');
+    ], 'public/js/vendor.js');
     mix.scripts([
         'vendor/modernizr-2.8.3.min.js',
         'vendor/jquery-1.11.3.min.js',
         'vendor/materialize.min.js',
         'vendor/select2-4.0.0.min.js',
         'vendor/handsontable.full.js'
-    ],'public/js/vendor-no-vue.js');
+    ], 'public/js/vendor-no-vue.js');
 
     mix.sass('app.scss');
     mix.sass('admin.scss');
     /**
      * Add versioning to punlic folder's js and css when in production.
      */
-   mix.version(['js/app.js','css/app.css','js/admin.js','css/admin.css']);
+    mix.version(['js/app.js', 'css/app.css', 'js/admin.js', 'css/admin.css']);
 
 });

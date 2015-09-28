@@ -12,18 +12,17 @@ class GFG2015Seeder extends Seeder
      */
 
 
-
     public function run()
     {
         //
         Model::unguard();
 
-        DB::transaction(function(){
+        DB::transaction(function () {
 
             $DBNAME = 'gfg2015';
             //Inporting comMaster => Competition Data
 
-            $compInfo = DB::table($DBNAME.'.compMaster')->first();
+            $compInfo = DB::table($DBNAME . '.compMaster')->first();
             $newInfo['name'] = $compInfo->compName;
             $newInfo['short_name'] = $compInfo->compCode;
             $newInfo['place'] = $compInfo->place;
@@ -31,17 +30,16 @@ class GFG2015Seeder extends Seeder
             $newInfo['end_date'] = $compInfo->dtTo;
             $newInfo['year'] = 2015;
             // this match_id will be used for adding participations
-            $this->command->info(implode('-',$newInfo));
+            $this->command->info(implode('-', $newInfo));
             $match = \App\Match::create($newInfo);
             $this->command->info("Match {$match->name} added");
 
 
             //Importing Athletes if any new
-            $thisCompAthletes = DB::table($DBNAME.'.shooterm')->select(
-                'cardNo','shooterID','idCount','shooterName','motherName','fatherName','address','city','pin','state','education','stateOfRep','eventRifle','eventPistol','eventShotgun','sex','POB','DOB','photoAvail','signAvail','contact','email','provisionalShooter'
+            $thisCompAthletes = DB::table($DBNAME . '.shooterm')->select(
+                'cardNo', 'shooterID', 'idCount', 'shooterName', 'motherName', 'fatherName', 'address', 'city', 'pin', 'state', 'education', 'stateOfRep', 'eventRifle', 'eventPistol', 'eventShotgun', 'sex', 'POB', 'DOB', 'photoAvail', 'signAvail', 'contact', 'email', 'provisionalShooter'
             )->get();
-            foreach($thisCompAthletes as $thisCompAthlete){
-
+            foreach ($thisCompAthletes as $thisCompAthlete) {
 
 
                 /**
@@ -49,36 +47,33 @@ class GFG2015Seeder extends Seeder
                  * Then making ID as "P_MatchID_shooterID"
                  * and then continue with the loop
                  */
-                if($thisCompAthlete->provisionalShooter == '1'){
+                if ($thisCompAthlete->provisionalShooter == '1') {
                     //$this->command->info("Entering provisional Shooter clause for {$thisCompAthlete->shooterID} ");
-                    $thisCompAthlete = (array) $thisCompAthlete;
+                    $thisCompAthlete = (array)$thisCompAthlete;
                     //Shooter is Provisional Shooter => append "P_" in front of his ID
                     $old_shooterID = $thisCompAthlete['shooterID'];
-                    $thisCompAthlete['shooterID']= 'P_'.(string)$match->id.'_'.$thisCompAthlete['shooterID'];
+                    $thisCompAthlete['shooterID'] = 'P_' . (string)$match->id . '_' . $thisCompAthlete['shooterID'];
 
-                    foreach($thisCompAthlete as $key=>$val){
-                        if(!isset($val)) $thisCompAthlete[$key] = 'provisional_id';
+                    foreach ($thisCompAthlete as $key => $val) {
+                        if (!isset($val)) $thisCompAthlete[$key] = 'provisional_id';
                     }
                     unset($thisCompAthlete['provisionalShooter']);
 
                     \App\Athlete::create($thisCompAthlete);
-                    DB::table($DBNAME.'.shooterm')
-                        ->where('shooterID',$old_shooterID)
+                    DB::table($DBNAME . '.shooterm')
+                        ->where('shooterID', $old_shooterID)
                         ->update(['shooterID' => $thisCompAthlete['shooterID']]);
-                    DB::table($DBNAME.'.Participation')
-                        ->where('shooterID',$old_shooterID)
+                    DB::table($DBNAME . '.Participation')
+                        ->where('shooterID', $old_shooterID)
                         ->update(['shooterID' => $thisCompAthlete['shooterID']]);
-                }
-
-
-                /**
+                } /**
                  * Searching for Athlete with same ID ,
                  * If Found=> Update
                  * Else Create
                  */
-                else{
-                    $athlete = \App\Athlete::where('shooterID',$thisCompAthlete->shooterID)->first();
-                    if($athlete == null){
+                else {
+                    $athlete = \App\Athlete::where('shooterID', $thisCompAthlete->shooterID)->first();
+                    if ($athlete == null) {
 
 
                         $thisCompAthlete = (array)$thisCompAthlete;
@@ -87,8 +82,7 @@ class GFG2015Seeder extends Seeder
 
 
                         \App\Athlete::create($thisCompAthlete);
-                    }
-                    else{
+                    } else {
                         $this->command->info("Updating{$thisCompAthlete->shooterID}");
 
 
@@ -106,13 +100,13 @@ class GFG2015Seeder extends Seeder
             }
 
             //Importing all Participations for the match
-            $participations = DB::table($DBNAME.'.Participation')->select(
-                'matchNo','matchName','qlyScore','matchType','shooterID','cptrCode','team','wildcard','participatingState','total','shotgunTotal','FsubTotal','shotgunFinalTotal','Rank'
+            $participations = DB::table($DBNAME . '.Participation')->select(
+                'matchNo', 'matchName', 'qlyScore', 'matchType', 'shooterID', 'cptrCode', 'team', 'wildcard', 'participatingState', 'total', 'shotgunTotal', 'FsubTotal', 'shotgunFinalTotal', 'Rank'
             )->get();
-            $participationsCount = DB::table($DBNAME.'.Participation')->select(
-                'matchNo','matchName','qlyScore','matchType','shooterID','cptrCode','team','wildcard','participatingState','total','shotgunTotal','FsubTotal','shotgunFinalTotal','Rank'
+            $participationsCount = DB::table($DBNAME . '.Participation')->select(
+                'matchNo', 'matchName', 'qlyScore', 'matchType', 'shooterID', 'cptrCode', 'team', 'wildcard', 'participatingState', 'total', 'shotgunTotal', 'FsubTotal', 'shotgunFinalTotal', 'Rank'
             )->count();
-            foreach($participations as $participation) {
+            foreach ($participations as $participation) {
                 $this->command->info("Remaning Participations : {$participationsCount}");
                 $event = \App\Event::where(['match_id' => $match->id, 'name' => $participation->matchNo])->first();
                 if ($event == null) {
@@ -141,23 +135,23 @@ class GFG2015Seeder extends Seeder
                 $score['event_id'] = $event->id;
                 $score['score'] = $participation->total;
                 $score['final_score'] = $participation->FsubTotal;
-                $unit = \App\Unit::where('name',strtolower($participation->participatingState))->first();
+                $unit = \App\Unit::where('name', strtolower($participation->participatingState))->first();
 
                 $score['representing_unit'] = $unit->id;
                 $score['verified_by_unit'] = 2;
-                if(strcmp($participation->Rank,'-----') != 0 )
+                if (strcmp($participation->Rank, '-----') != 0)
                     $score['rank'] = $participation->Rank;
                 $score['record'] = null;
-                echo "\nScore : " ;
+                echo "\nScore : ";
 
                 print_r($score);
                 \App\Score::create($score);
                 $participationsCount--;
                 $event = null;
-                $score= null;
+                $score = null;
             }
-            DB::update('update '.$DBNAME.'.Participation set shooterID = right(shooterID,13)');
-            DB::update('update '.$DBNAME.'.shooterm set shooterID = right(shooterID,13)');
+            DB::update('update ' . $DBNAME . '.Participation set shooterID = right(shooterID,13)');
+            DB::update('update ' . $DBNAME . '.shooterm set shooterID = right(shooterID,13)');
         });
         Model::reguard();
     }

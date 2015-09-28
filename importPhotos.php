@@ -23,12 +23,12 @@ $result = mysqli_query($conn, $sql);
 $count = 1;
 if (mysqli_num_rows($result) > 0) {
     // output data of each row
-    while($row = mysqli_fetch_assoc($result)) {
-		echo $count." ";
-        echo "ID: " .$row['shooterID']."</br>";
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo $count . " ";
+        echo "ID: " . $row['shooterID'] . "</br>";
         //echo '<img src="data:image/jpeg;base64,'.base64_encode( $row['photo'] ).'"/>';
-		file_put_contents("C:\\Sites\\laravel-2\\resources\\assets\\shooter_i_d_photos\\".$row['shooterID'].".jpg",$row['photo'] );
-		$count++;
+        file_put_contents("C:\\Sites\\laravel-2\\resources\\assets\\shooter_i_d_photos\\" . $row['shooterID'] . ".jpg", $row['photo']);
+        $count++;
     }
 } else {
     echo "0 results";

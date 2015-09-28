@@ -34,12 +34,16 @@ class Event extends Model
     }
 
 
-    public function scopeForMatch($query,$match_id){
-        return $query->where('match_id',$match_id);
+    public function scopeForMatch($query, $match_id)
+    {
+        return $query->where('match_id', $match_id);
     }
-    public function scopeForClasses($query,$playableClasses){
-        return $query->where('classes' , 'in',$playableClasses);
+
+    public function scopeForClasses($query, $playableClasses)
+    {
+        return $query->where('classes', 'in', $playableClasses);
     }
+
     public function setNameAttribute($name)
     {
         $this->attributes['name'] = strtoupper($name);

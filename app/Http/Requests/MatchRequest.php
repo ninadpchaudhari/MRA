@@ -27,12 +27,12 @@ class MatchRequest extends Request
     {
         return [
             //
-            'name'=> ['required','min:3','max:255'],
-            'place' => ['required','min:3','max:50'],
+            'name' => ['required', 'min:3', 'max:255'],
+            'place' => ['required', 'min:3', 'max:50'],
             'start_date' => ['required', 'date_format:d-m-Y'],
-            'end_date' => ['required','date_format:d-m-Y','after:start_date'],
-            'short_name' => ['required' , 'min:3','max:15'],
-            'year' => ['required','digits:4']
+            'end_date' => ['required', 'date_format:d-m-Y', 'after:start_date'],
+            'short_name' => ['required', 'min:3', 'max:15'],
+            'year' => ['required', 'digits:4']
         ];
     }
 }

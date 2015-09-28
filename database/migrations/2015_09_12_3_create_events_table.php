@@ -25,7 +25,7 @@ class CreateEventsTable extends Migration
             //$table->decimal('issf_qualification_score',6,2)->nullable(); // required qual score
             //$table->integer('nr_qualification_score')->unsigned()->nullable(); // required nr score
             $table->boolean('isDecimal')->nullable(); // true for decimal counting
-            $table->decimal('max_score',6,2)->nullable(); //Maximum attainable score
+            $table->decimal('max_score', 6, 2)->nullable(); //Maximum attainable score
             $table->timestamps();
 
             $table->foreign('match_id')

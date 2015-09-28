@@ -15,7 +15,7 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::get('/', function (){
+Route::get('/', function () {
     return view('form.index');
 });
 //Route::resource('/api/athletePhoto','athletesPhotoController');
@@ -30,16 +30,17 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
-Route::get('scores/match_id/{match_id}','scoresController@indexForMatch');
-Route::get('scores/match_id/{match_id}/class_id/{class_id}',['as'=>'getScoresByClass','uses'=>'scoresController@indexForMatchAndClass']);
-Route::resource('matches','matchesController');
-Route::resource('events','eventsController');
-Route::resource('scores','scoresController');
-Route::resource('athletes','athletesController');
+Route::get('scores/match_id/{match_id}', 'scoresController@indexForMatch');
+Route::get('scores/match_id/{match_id}/class_id/{class_id}', ['as' => 'getScoresByClass', 'uses' => 'scoresController@indexForMatchAndClass']);
+Route::post('scores/match_id/{match_id}/class_id/{class_id}', ['as' => 'storeScoresByClass', 'uses' => 'scoresController@storeForMatchAndClass']);
+Route::resource('matches', 'matchesController');
+Route::resource('events', 'eventsController');
+Route::resource('scores', 'scoresController');
+Route::resource('athletes', 'athletesController');
 //Route::resource('events','eventsController');
 
-Route::group(['prefix' => 'admin'],function(){
-    Route::get('/',function(){
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/', function () {
         return view('admin.home');
     });
 });
@@ -52,10 +53,29 @@ Route::group(['prefix' => 'admin'],function(){
     return $img->response("jpg");
 });
 */
-Route::get('letterhead',function(){
+Route::get('relay', function () {
+    $class_id = 0;
+    $match_id = 1;
+    $entries = unserialize(file_get_contents(storage_path('app/request.txt')));
+    $class = \App\Event::decodeArray()['classes'][$class_id];
+    foreach ($entries as $entry) {
+        //Set Relay Number
+        DB::table('scores')
+            ->where('athlete_id', '=', $entry->athlete_id)
+            ->whereIn('event_id', function ($query) use ($match_id, $class) {
+                $query->from('events')
+                    ->select('id')
+                    ->where('class', '=', $class)
+                    ->where('match_id', '=', $match_id);
+            })
+            ->update(['relay_no' => $entry->relay_no]);
+    }
+    return $entries;
+});
+Route::get('letterhead', function () {
     set_time_limit(0);
     //return view('phpinfo');
-   return PDF::loadFile(storage_path('app/index.htm'))->stream('download.pdf');
+    return PDF::loadFile(storage_path('app/index.htm'))->stream('download.pdf');
 
     //return PDF::loadFile('http://www.github.com')->download('github.pdf');
     //return PDF::loadHTML('<h1>HI</h1>')->download('hi.pdf');

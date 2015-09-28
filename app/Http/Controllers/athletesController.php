@@ -19,8 +19,8 @@ class athletesController extends Controller
     public function index(Request $request)
     {
         //
-        if($request->match_id == null ) return Athlete::all();
-        
+        if ($request->match_id == null) return Athlete::all();
+
     }
 
     /**
@@ -37,17 +37,17 @@ class athletesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param  Request $request
      * @return Response
      */
     public function store(Request $request)
     {
         //
         \App\Athlete::unguard();
-        $athlete  = \App\Athlete::create($request->except(['_method', '_token']));
+        $athlete = \App\Athlete::create($request->except(['_method', '_token']));
         \App\Athlete::reguard();
 
-        if($athlete != null){
+        if ($athlete != null) {
             Flash::message("{$athlete->shooterName} was added successfully");
             return redirect()->action('athletesController@create');
         }
@@ -58,7 +58,7 @@ class athletesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function show($shooterID)
@@ -74,7 +74,7 @@ class athletesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function edit($id)
@@ -85,8 +85,8 @@ class athletesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  int  $id
+     * @param  Request $request
+     * @param  int $id
      * @return Response
      */
     public function update(Request $request, $id)
@@ -97,7 +97,7 @@ class athletesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function destroy($id)

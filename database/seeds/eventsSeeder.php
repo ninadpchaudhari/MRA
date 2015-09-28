@@ -14,12 +14,12 @@ class eventsSeeder extends Seeder
     {
         //
         Model::unguard();
-        DB::transaction(function(){
+        DB::transaction(function () {
             $DBNAME = 'mra';
             //Inporting comMaster => Competition Data
 
-            $records = DB::table($DBNAME.'.events_seeder')->get();
-            foreach($records as $record){
+            $records = DB::table($DBNAME . '.events_seeder')->get();
+            foreach ($records as $record) {
                 \App\Event::create((array)$record);
                 print_r($record);
             }

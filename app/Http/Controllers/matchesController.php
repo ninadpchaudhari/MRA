@@ -21,7 +21,7 @@ class matchesController extends Controller
     {
         //
         $matches = \App\Match::latest('start_date')->get();
-        return view('matches.index',compact('matches'));
+        return view('matches.index', compact('matches'));
     }
 
     /**
@@ -38,7 +38,7 @@ class matchesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param  Request $request
      * @return Response
      */
     public function store(Requests\MatchRequest $request)
@@ -52,23 +52,23 @@ class matchesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function show($id)
     {
         //
         $match = Match::findorFail($id);
-        $events = \App\Event::where('match_id',$match->id)
+        $events = \App\Event::where('match_id', $match->id)
             ->orderBy('name')
             ->get();
-        return view('matches.show',compact('match','events'));
+        return view('matches.show', compact('match', 'events'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function edit($id)
@@ -76,17 +76,17 @@ class matchesController extends Controller
         //
         $match = Match::findOrFail($id);
 
-        return view('matches.edit',compact('match'));
+        return view('matches.edit', compact('match'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  int  $id
+     * @param  Request $request
+     * @param  int $id
      * @return Response
      */
-    public function update($id,Requests\MatchRequest $request)
+    public function update($id, Requests\MatchRequest $request)
     {
         //
         debug($request->all());
@@ -100,7 +100,7 @@ class matchesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function destroy($id)

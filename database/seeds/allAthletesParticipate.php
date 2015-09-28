@@ -13,14 +13,14 @@ class allAthletesParticipate extends Seeder
     {
         //
         \Illuminate\Database\Eloquent\Model::unguard();
-        $athletes  = \App\Athlete::all();
+        $athletes = \App\Athlete::all();
         $events = \App\Event::all();
-        foreach($athletes as $athlete){
-            foreach($events as $event){
+        foreach ($athletes as $athlete) {
+            foreach ($events as $event) {
                 $scoreArray['athlete_id'] = $athlete->id;
                 $scoreArray['event_id'] = $event->id;
-            \App\Score::create($scoreArray);
-        }
+                \App\Score::create($scoreArray);
+            }
         }
         \Illuminate\Database\Eloquent\Model::reguard();
 

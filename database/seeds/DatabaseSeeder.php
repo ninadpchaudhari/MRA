@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         // $this->call(UserTableSeeder::class);
-        factory(App\Athlete::class, 50)->create()->each(function($u) {
+        factory(App\Athlete::class, 50)->create()->each(function ($u) {
             $u->scores()->save(factory(App\Score::class)->make());
         });
         Model::reguard();
