@@ -26,15 +26,28 @@ class scoresController extends Controller
 
     public function indexForMatchAndClass($class_id,$match_id){
         $class = \App\Event::decodeArray()['classes'][$class_id];
-        return DB::table('scores')
+
+        $scores =
+            DB::table('scores')
+                ->select('scores.*')
             ->join('events',function($join) use ($class , $match_id){
                 $join->on('scores.event_id','=','events.id')
                     ->where('events.class','=',$class)
                     ->where('events.match_id','=',$match_id);
             })
             ->groupBy('athlete_id')
-            ->get()
-            ->toJson();
+            ->get();
+
+        foreach($scores as $score){
+            unset($score->created_at);
+            unset($score->updated_at);
+            $flatten[] = array_flatten((array)$score);
+        }
+
+        return \Response::json($flatten,200);
+        //For everything
+        //return \Response::json($scores,200);
+
     }
     /**
      * Gives all the scores of a match

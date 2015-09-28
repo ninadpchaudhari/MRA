@@ -6,57 +6,49 @@
         <h3>{{$classValue}}</h3>
         <div id="info_{{$classKey}}"></div>
     @endforeach
-    <div id="example1" class="hot handsontable"></div>
+    <div class="row">
+        <div class="col s12">
+            <div id="example"></div>
+        </div>
+    </div>
+
     @endsection
 @section('footer')
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
 
-            function getData() {
-                return [
-                    ['', 'Kia', 'Nissan', 'Toyota', 'Honda', 'Mazda', 'Ford'],
-                    ['2012', 10, 11, 12, 13, 15, 16],
-                    ['2013', 10, 11, 12, 13, 15, 16],
-                    ['2014', 10, 11, 12, 13, 15, 16],
-                    ['2015', 10, 11, 12, 13, 15, 16],
-                    ['2016', 10, 11, 12, 13, 15, 16]
-                ];
-            }
-
-            // Instead of creating a new Handsontable instance
-            // with the container element passed as an argument,
-            // you can simply call .handsontable method on a jQuery DOM object.
-            var $container = $("#example1");
-
-            $container.handsontable({
-                data: getData(),
-                rowHeaders: true,
-                colHeaders: true,
-                contextMenu: true
-            });
-
-            // This way, you can access Handsontable api methods by passing their names as an argument, e.g.:
-            var hotInstance = $("#example1").handsontable('getInstance');
-            console.log(hotInstance);
-            function bindDumpButton() {
-                if (typeof Handsontable === "undefined") {
-                    return;
-                }
-
-                Handsontable.Dom.addEvent(document.body, 'click', function (e) {
-
-                    var element = e.target || e.srcElement;
-
-                    if (element.nodeName == "BUTTON" && element.name == 'dump') {
-                        var name = element.getAttribute('data-dump');
-                        var instance = element.getAttribute('data-instance');
-                        var hot = window[instance];
-                        console.log('data of ' + name, hot.getData());
-                    }
+        $('document').ready(function(){
+            var allData = function(){
+                data = JSON.parse("[[51,1,null,0,51,null,null,0],[113,2,null,0,51,null,null,0],[175,3,null,0,51,null,null,0],[237,4,null,0,51,null,null,0],[299,5,null,0,51,null,null,0],[361,6,null,0,51,null,null,0],[423,7,null,0,51,null,null,0],[485,8,null,0,51,null,null,0],[547,9,null,0,51,null,null,0],[609,10,null,0,51,null,null,0],[671,11,null,0,51,null,null,0],[733,12,null,0,51,null,null,0],[795,13,null,0,51,null,null,0],[857,14,null,0,51,null,null,0],[919,15,null,0,51,null,null,0]]");
+                console.log(data);
+                return data;
+                $.get('{{ route('getScoresByClass',['match_id'=>1,'class_id'=>1]) }}',function(data,status){
+                    //alert('data :'+ data +'\nStatus : '+status);
+                    data = JSON.parse("[[51,1,null,0,51,null,null,0],[113,2,null,0,51,null,null,0],[175,3,null,0,51,null,null,0],[237,4,null,0,51,null,null,0],[299,5,null,0,51,null,null,0],[361,6,null,0,51,null,null,0],[423,7,null,0,51,null,null,0],[485,8,null,0,51,null,null,0],[547,9,null,0,51,null,null,0],[609,10,null,0,51,null,null,0],[671,11,null,0,51,null,null,0],[733,12,null,0,51,null,null,0],[795,13,null,0,51,null,null,0],[857,14,null,0,51,null,null,0],[919,15,null,0,51,null,null,0]]");
+                    console.log(data);
+                    return data;
                 });
-            }
-            bindDumpButton();
-
+            };
+            var container = document.getElementById('example');;
+            var hot = new Handsontable(container,{
+                data: allData(),
+                height: 396,
+                colHeaders:["id","athlete_id","relay_no","inTeam","event_id","score","final_score","representing_unit"],
+                rowHeaders: true,
+                stretchH: 'all',
+                columnSorting: true,
+                contextMenu: true,
+                columns:[
+                    {data: 0,type:'numeric'},
+                    {data: 1,type:'numeric'},
+                    {data: 2,type:'text'},
+                    {data: 3,type:'numeric'},
+                    {data: 4,type:'numeric'},
+                    {data: 5,type:'text'},
+                    {data: 6,type:'text'},
+                    {data: 7,type:'numeric'},
+                ]
+            });
         });
+
     </script>
 @endsection
