@@ -43,10 +43,12 @@ Route::resource('matches', 'matchesController');
 Route::resource('events', 'eventsController');
 Route::resource('scores', 'scoresController');
 Route::resource('athletes', 'athletesController');
-Route::get('relays/match_id/{match_id}/class_id/{class_id}/gender/{gender}',['as'=>'getRelaysByClassAndGender','uses'=>'relayController@indexClassAndGender']);
-Route::get('matches/{match_id}/relays/print', 'relayController@printIndex');
-Route::resource('matches/{match_id}/relays', 'relayController');
+Route::get('relays/match_id/{match_id}/class_id/{class_id}/gender/{gender}',['as'=>'printRelaysByClassAndGender','uses'=>'relayController@printRelayByClassAndGender']);
+Route::get('relays/match_id/{match_id}/index', ['as'=>'indexForRelays','uses'=>'relayController@printIndex']);
 
+Route::resource('matches/{match_id}/relays', 'relayController');
+Route::get('ranks/match_id/{match_id}/print',['as'=>'printRankingIndex','uses'=>'rankController@printIndex']);
+Route::get('ranks/match_id/{match_id}/event_id/{event_name}',['as'=>'printRankingByEventName','uses'=>'rankController@printByEventName']);
 //Route::resource('events','eventsController');
 
 Route::group(['prefix' => 'admin'], function () {

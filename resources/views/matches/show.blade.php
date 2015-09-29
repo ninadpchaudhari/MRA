@@ -22,9 +22,13 @@
            class="btn btn-default">
             Manage Relays
         </a>
-        <a href="{{action('relayController@printIndex',['match_id'=>$match->id])}}"
+        <a href="{{route('indexForRelays',['match_id'=>$match->id])}}"
            class="btn btn-default">
             Print Relays
+        </a>
+        <a href="{{route('printRankingIndex',['match_id'=>$match->id])}}"
+           class="btn btn-default">
+            Print Ranking
         </a>
 
     </div>

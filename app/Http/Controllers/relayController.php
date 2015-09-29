@@ -130,6 +130,7 @@ class relayController extends Controller
     }
     public function printRelayByClassAndGender($match_id,$class_id,$gender){
         $relayInfo = Array();
+        $athletes = Array();
         $class = \App\Event::decodeArray()['classes'][$class_id];
         $listOfRelays =
             DB::table('relays')
@@ -168,7 +169,6 @@ class relayController extends Controller
                 //$relayInfo[$relayNo] will give all info about relay
         }
         //
-        //dd($athletes);
         //return view('relay.showRelays',compact('athletes','relayInfo','class','gender'));
         $pdf = \PDF::loadView('relay.showRelays',compact('athletes','relayInfo','class','gender'))->setPaper('a4')->setOrientation('portrait')->setOption('margin-bottom', 0)->download('download.pdf');
         return $pdf;
@@ -190,13 +190,5 @@ class relayController extends Controller
 
         return view('relay.printIndex',compact('decodeArray','match_id'));
     }
-    public function indexClassAndGender($match_id,$class_id,$gender,Request $request){
-        $class=\App\Event::decodeArray()['classes'][$class_id];
-        if($request->ajax()){
 
-        }
-        else{
-            return $this->printRelayByClassAndGender($match_id,$class_id,$gender);
-        }
-    }
 }

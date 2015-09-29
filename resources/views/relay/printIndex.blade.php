@@ -8,7 +8,7 @@
             <h4>Classes - Gender:</h4>
             @foreach($decodeArray['classes'] as $classKey =>$classValue)
                 @foreach($decodeArray['genders'] as $genderValue)
-                    <a href="{{ route('getRelaysByClassAndGender',['match_id'=>$match_id,'class_id'=>$classKey,'gender'=>$genderValue]) }}"
+                    <a href="{{ route('printRelaysByClassAndGender',['match_id'=>$match_id,'class_id'=>$classKey,'gender'=>$genderValue]) }}"
                        class="btn btn-flat"
                             >{{$classValue." ".$genderValue}}</a>
                     <br>
