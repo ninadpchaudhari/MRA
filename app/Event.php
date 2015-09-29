@@ -131,7 +131,31 @@ class Event extends Model
             );
 
     }
+    public static function decodeArrayForMatch_id($match_id){
+        $decodeArray = \App\Event::decodeArray();
+        $classes = \App\Event::where('match_id',$match_id)->distinct()->lists('class')->toArray();
+        $genders = \App\Event::where('match_id',$match_id)->distinct()->lists('gender')->toArray();
+        $categories = \App\Event::where('match_id',$match_id)->distinct()->lists('category')->toArray();
+        $types = \App\Event::where('match_id',$match_id)->distinct()->lists('type')->toArray();
 
+        foreach($decodeArray['classes'] as $classKey => $classValue){
+            if(in_array($classValue,$classes))  continue;
+            else unset($decodeArray['classes'][$classKey]);
+        }
+        foreach($decodeArray['genders'] as $genderKey=>$genderValue){
+            if(in_array($genderValue,$genders))  continue;
+            else unset($decodeArray['genders'][$genderKey]);
+        }
+        foreach($decodeArray['categories'] as $categoryKey => $categoryValue){
+            if(in_array($categoryValue,$categories))  continue;
+            else unset($decodeArray['categories'][$categoryKey]);
+        }
+        foreach($decodeArray['types'] as $typeKey => $typeValue){
+            if(in_array($typeValue,$types))  continue;
+            else unset($decodeArray['types'][$typeKey]);
+        }
+        return $decodeArray;
+    }
     public static function decodeEvent($matchName, $requirement)
     {
         print_r($matchName . "\n" . $requirement);

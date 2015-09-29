@@ -21,23 +21,23 @@ class CreateAthletesTable extends Migration
                 $table->string('shooterID')->nullable();
                 $table->integer('idCount')->unsigned()->nullable();
                 $table->string('shooterName');
-                $table->string('motherName')->nllable();
-                $table->string('fatherName')->nllable();
-                $table->string('address')->nllable();
-                $table->string('city')->nllable();
-                $table->integer('pin')->unsigned()->nllable();
-                $table->string('education')->nllable();
-                $table->string('clubOfRep')->nllable();
+                $table->string('motherName')->nullable();
+                $table->string('fatherName')->nullable();
+                $table->string('address')->nullable();
+                $table->string('city')->nullable();
+                $table->integer('pin')->unsigned()->nullable();
+                $table->string('education')->nullable();
+                $table->string('clubOfRep')->nullable();
                 $table->boolean('eventRifle');
                 $table->boolean('eventPistol');
                 $table->boolean('eventShotgun');
                 $table->string('sex');
-                $table->string('POB')->nllable();
-                $table->dateTime('DOB')->nllable();
-                $table->boolean('photoAvail')->nllable(); // photos are stored with shooterID.jpg
-                $table->boolean('signAvail')->nllable();
-                $table->string('contact')->nllable();
-                $table->string('email')->nllable();
+                $table->string('POB')->nullable();
+                $table->dateTime('DOB')->nullable();
+                $table->boolean('photoAvail')->nullable(); // photos are stored with shooterID.jpg
+                $table->boolean('signAvail')->nullable();
+                $table->string('contact')->nullable();
+                $table->string('email')->nullable();
                 $table->timestamps();
             });
         }

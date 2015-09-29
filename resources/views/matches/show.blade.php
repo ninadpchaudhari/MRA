@@ -14,10 +14,19 @@
            class="btn btn-default">
             Edit Match
         </a>
-        <a href="{{action('matchesController@edit',['id' => $match->id])}}"
+        <a href="{{route('indexForSelectingClass',['match_id'=>$match->id])}}"
            class="btn btn-default">
-            All Shooters
+            Manage Shooters
         </a>
+        <a href="{{action('relayController@index',['match_id'=>$match->id])}}"
+           class="btn btn-default">
+            Manage Relays
+        </a>
+        <a href="{{action('relayController@printIndex',['match_id'=>$match->id])}}"
+           class="btn btn-default">
+            Print Relays
+        </a>
+
     </div>
 <br>
 @include('matches._event_list')

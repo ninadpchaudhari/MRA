@@ -30,13 +30,23 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
-Route::get('scores/match_id/{match_id}', 'scoresController@indexForMatch');
+Route::get('scores/match_id/{match_id}', ['as'=>'indexForSelectingClass','uses'=> 'scoresController@indexForSelectingClass']);
 Route::get('scores/match_id/{match_id}/class_id/{class_id}', ['as' => 'getScoresByClass', 'uses' => 'scoresController@indexForMatchAndClass']);
 Route::post('scores/match_id/{match_id}/class_id/{class_id}', ['as' => 'storeScoresByClass', 'uses' => 'scoresController@storeForMatchAndClass']);
+Route::get('scores/match_id/{match_id}/class_id/{class_id}/gender/{gender}', ['as' => 'getScoresByClassAndGender', 'uses' => 'scoresController@indexForMatchAndClassAndGender']);
+
+Route::get('scores/match_id/{match_id}/class_id/{class_id}/gender/{gender}/category/{category}',
+    ['as' => 'getScoresByClassAndGenderAndCategory',
+        'uses' => 'scoresController@indexForMatchAndClassAndGenderAndCategory']);
+
 Route::resource('matches', 'matchesController');
 Route::resource('events', 'eventsController');
 Route::resource('scores', 'scoresController');
 Route::resource('athletes', 'athletesController');
+Route::get('relays/match_id/{match_id}/class_id/{class_id}/gender/{gender}',['as'=>'getRelaysByClassAndGender','uses'=>'relayController@indexClassAndGender']);
+Route::get('matches/{match_id}/relays/print', 'relayController@printIndex');
+Route::resource('matches/{match_id}/relays', 'relayController');
+
 //Route::resource('events','eventsController');
 
 Route::group(['prefix' => 'admin'], function () {
@@ -75,11 +85,15 @@ Route::get('relay', function () {
 Route::get('letterhead', function () {
     set_time_limit(0);
     //return view('phpinfo');
-    return PDF::loadFile(storage_path('app/index.htm'))->stream('download.pdf');
-
     //return PDF::loadFile('http://www.github.com')->download('github.pdf');
+    return PDF::loadFile(storage_path('app/index.htm'))->setPaper('a4')->setOrientation('portrait')->setOption('margin-bottom', 0)->stream('download.pdf');
+
+
     //return PDF::loadHTML('<h1>HI</h1>')->download('hi.pdf');
     //$pdf = App::make('snappy.pdf.wrapper');
     //$pdf->loadHTML('<h1>Test</h1>');
     //return $pdf->stream();
+});
+Route::get('test/{eventClass}',function($eventClass){
+    return \Response::json($eventClass);
 });
