@@ -27,6 +27,7 @@ class CreateScoresTable extends Migration
             //$table->string('record')->nullable(); // Any Record formed because of this score
             $table->timestamps();
             //$table->foreign('representing_unit')->references('id')->on('units');
+            $table->integer('cptr_no');
             $table->foreign('athlete_id')->references('id')->on('athletes');
             $table->foreign('event_id')->references('id')->on('events');
         });

@@ -2,6 +2,8 @@
 @section('content')
     <h2>Adding Score</h2>
     <hr>
+    {{$athlete->shooterName}}
+    {{$athlete->id}}
     {!! Form::open(['action'=>'scoresController@store','method'=>'POST']) !!}
     {!! csrf_field() !!}
             @include('scores._form')

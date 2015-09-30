@@ -57,7 +57,7 @@
                 container = document.getElementById('container');
                 hot = new Handsontable(container,{
                 
-                colHeaders:["Athlete_ID","Name","Unit","inTeam","score","final_score","relay_no"],
+                colHeaders:["ID","Cptr_No","Name","Unit","event_names","score","final_score","relay_no"],
                 rowHeaders: true,
                 stretchH: 'all',
                 columnSorting: true,
@@ -69,9 +69,10 @@
                     search : true,
                 columns:[
                     {data: 'athlete_id',type:'numeric'},
+                    {data: 'cptr_no',type:'numeric'},
                     {data: 'shooterName',type:'text'},
                     {data: 'abbreviation',type:'text'},
-                    {data: 'inTeam',type:'numeric'},
+                    {data: 'event_names',type:'numeric'},
                     {data: 'score',type:'numeric'},
                     {data: 'final_score',type:'numeric'},
                     {data: 'relay_no',type:'numeric'},

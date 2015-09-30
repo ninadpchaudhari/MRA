@@ -28,7 +28,7 @@ class scoresController extends Controller
     public function getScoresFor($match_id='*',$class='%',$gender='%',$category='%'){
 
         $scores = DB::table('scores')
-            ->select('scores.athlete_id','scores.inTeam','scores.score','scores.final_score','scores.relay_no', 'athletes.shooterName', 'units.abbreviation')
+            ->select('scores.athlete_id','scores.cptr_no','scores.inTeam','scores.score','scores.final_score','scores.relay_no', 'athletes.shooterName', 'units.abbreviation')
             ->join('events', function ($join) use ($class, $match_id,$gender,$category) {
                 $join->on('scores.event_id', '=', 'events.id')
                     ->where('events.match_id', '=', $match_id)
@@ -46,6 +46,22 @@ class scoresController extends Controller
             unset($score->updated_at);
             unset($score->representing_unit);
 
+        }
+        foreach($scores as $score){
+
+            $event_names = DB::table('events')
+                ->where('match_id','=',$match_id)
+                ->whereIn('id',function($query)use($score){
+                    $query->select('event_id')
+                        ->from('scores')
+                        ->where('athlete_id','=',$score->athlete_id);
+                })
+                ->lists('name');
+            $event_string = (string) "";
+            foreach($event_names as $event_name){
+                $event_string .= $event_name.',';
+            }
+            $score->event_names = $event_string;
         }
 
         return $scores;
@@ -93,10 +109,12 @@ class scoresController extends Controller
 
 
     }
+
     public function indexForMatchAndClassAndGender($match_id,$class_id,$gender,Request $request){
         $class=\App\Event::decodeArray()['classes'][$class_id];
-        if($request->ajax()){
+        $scores = $this->getScoresFor($match_id,$class,$gender);
 
+        if($request->ajax()){
             $scores = $this->getScoresFor($match_id,$class,$gender);
             return \Response::json($scores, 200);
         }
@@ -108,7 +126,6 @@ class scoresController extends Controller
     public function indexForMatchAndClassAndGenderAndCategory($match_id,$class_id,$gender,$category,Request $request){
         $class=\App\Event::decodeArray()['classes'][$class_id];
         if($request->ajax()){
-
             $scores = $this->getScoresFor($match_id,$class,$gender,$category);
             return \Response::json($scores, 200);
         }
@@ -144,7 +161,7 @@ class scoresController extends Controller
             return view('scores.get_athlete_id');
         } else {
             $athlete = Athlete::findOrFail($request->athlete_id);
-            return view('scores.create');
+            return view('scores.create',compact('athlete'));
 
         }
 
