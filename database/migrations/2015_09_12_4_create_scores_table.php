@@ -28,6 +28,7 @@ class CreateScoresTable extends Migration
             $table->timestamps();
             //$table->foreign('representing_unit')->references('id')->on('units');
             $table->integer('cptr_no');
+            $table->string('shots'); // Seriaized class of the score
             $table->foreign('athlete_id')->references('id')->on('athletes');
             $table->foreign('event_id')->references('id')->on('events');
         });

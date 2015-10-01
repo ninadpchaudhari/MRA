@@ -25,6 +25,7 @@ class scoresController extends Controller
         return Score::all();
 
     }
+
     public function getScoresFor($match_id='*',$class='%',$gender='%',$category='%'){
 
         $scores = DB::table('scores')
