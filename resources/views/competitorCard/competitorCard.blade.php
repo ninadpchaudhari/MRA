@@ -9,8 +9,8 @@
                         width:28.3cm;
                         height:19.5cm
         ">
-            <div class="row" style="margin-bottom: -1px">
-                <div class="col s2">
+            <div class="row" style="margin-bottom: 0px">
+                <div class="col s2" style="margin-top: 15px;">
                     <img src="{{ url('images/mra_logo.jpg') }}" alt="MRA Logo">
                 </div>
                 <div class="col s10">
