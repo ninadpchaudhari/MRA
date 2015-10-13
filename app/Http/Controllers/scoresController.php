@@ -116,7 +116,7 @@ class scoresController extends Controller
         $scores = $this->getScoresFor($match_id,$class,$gender);
 
         if($request->ajax()){
-            $scores = $this->getScoresFor($match_id,$class,$gender);
+            //$scores = $this->getScoresFor($match_id,$class,$gender);
             return \Response::json($scores, 200);
         }
         else{

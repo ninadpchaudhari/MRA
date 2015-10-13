@@ -47,6 +47,12 @@ Route::get('relays/match_id/{match_id}/class_id/{class_id}/gender/{gender}',['as
 Route::get('relays/match_id/{match_id}/index', ['as'=>'indexForRelays','uses'=>'relayController@printIndex']);
 
 Route::resource('matches/{match_id}/relays', 'relayController');
+
+Route::group(['prefix'=>'competitor_card/match_id/{match_id}'],function(){
+    Route::get('/',['as'=>'indexForCompetitorCards','uses'=>'competitorCardController@printCompetitorCard']);
+    //Route::get('/class_id/{class_id}/gender/{gender}',['as'=>'printCompetitorCardByClassAndGender','uses'=>'competitorCardController@printCompetitorCardByClassAndGender']);
+});
+
 Route::get('ranks/match_id/{match_id}/print',['as'=>'printRankingIndex','uses'=>'rankController@printIndex']);
 Route::get('ranks/match_id/{match_id}/event_id/{event_name}',['as'=>'printRankingByEventName','uses'=>'rankController@printByEventName']);
 //Route::resource('events','eventsController');

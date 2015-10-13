@@ -27,6 +27,7 @@
 
     {{--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">--}}
     <link rel="stylesheet" href="/font/material-icons/material-icons.css">
+    @yield('head')
 </head>
 <body>
 <!--[if lt IE 8]>

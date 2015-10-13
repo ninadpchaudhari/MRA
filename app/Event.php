@@ -131,30 +131,66 @@ class Event extends Model
             );
 
     }
-    public static function decodeArrayForMatch_id($match_id){
+    public static function decodeArrayForMatch_id($match_id,$requirement = ""){
         $decodeArray = \App\Event::decodeArray();
-        $classes = \App\Event::where('match_id',$match_id)->distinct()->lists('class')->toArray();
-        $genders = \App\Event::where('match_id',$match_id)->distinct()->lists('gender')->toArray();
-        $categories = \App\Event::where('match_id',$match_id)->distinct()->lists('category')->toArray();
-        $types = \App\Event::where('match_id',$match_id)->distinct()->lists('type')->toArray();
+        switch ($requirement){
+            case "classes":
+                $classes = \App\Event::where('match_id',$match_id)->distinct()->lists('class')->toArray();
+                foreach($decodeArray['classes'] as $classKey => $classValue){
+                    if(in_array($classValue,$classes))  continue;
+                    else unset($decodeArray['classes'][$classKey]);
+                }
+                return $decodeArray['classes'];
+                break;
+            case "genders":
+                $genders = \App\Event::where('match_id',$match_id)->distinct()->lists('gender')->toArray();
+                foreach($decodeArray['genders'] as $genderKey=>$genderValue){
+                    if(in_array($genderValue,$genders))  continue;
+                    else unset($decodeArray['genders'][$genderKey]);
+                }
+                return $decodeArray['genders'];
+                break;
+            case "categories":
+                $categories = \App\Event::where('match_id',$match_id)->distinct()->lists('category')->toArray();
+                foreach($decodeArray['categories'] as $categoryKey => $categoryValue){
+                    if(in_array($categoryValue,$categories))  continue;
+                    else unset($decodeArray['categories'][$categoryKey]);
+                }
+                return $decodeArray['categories'];
+                break;
+            case "types" :
+                $types = \App\Event::where('match_id',$match_id)->distinct()->lists('type')->toArray();
+                foreach($decodeArray['types'] as $typeKey => $typeValue){
+                    if(in_array($typeValue,$types))  continue;
+                    else unset($decodeArray['types'][$typeKey]);
+                }
+                return $decodeArray['types'];
+                break;
+            default :
+                $classes = \App\Event::where('match_id',$match_id)->distinct()->lists('class')->toArray();
+                foreach($decodeArray['classes'] as $classKey => $classValue){
+                    if(in_array($classValue,$classes))  continue;
+                    else unset($decodeArray['classes'][$classKey]);
+                }
+                $genders = \App\Event::where('match_id',$match_id)->distinct()->lists('gender')->toArray();
+                foreach($decodeArray['genders'] as $genderKey=>$genderValue){
+                    if(in_array($genderValue,$genders))  continue;
+                    else unset($decodeArray['genders'][$genderKey]);
+                }
+                $categories = \App\Event::where('match_id',$match_id)->distinct()->lists('category')->toArray();
+                foreach($decodeArray['categories'] as $categoryKey => $categoryValue){
+                    if(in_array($categoryValue,$categories))  continue;
+                    else unset($decodeArray['categories'][$categoryKey]);
+                }
+                $types = \App\Event::where('match_id',$match_id)->distinct()->lists('type')->toArray();
+                foreach($decodeArray['types'] as $typeKey => $typeValue){
+                    if(in_array($typeValue,$types))  continue;
+                    else unset($decodeArray['types'][$typeKey]);
+                }
+                return $decodeArray;
+                break;
 
-        foreach($decodeArray['classes'] as $classKey => $classValue){
-            if(in_array($classValue,$classes))  continue;
-            else unset($decodeArray['classes'][$classKey]);
         }
-        foreach($decodeArray['genders'] as $genderKey=>$genderValue){
-            if(in_array($genderValue,$genders))  continue;
-            else unset($decodeArray['genders'][$genderKey]);
-        }
-        foreach($decodeArray['categories'] as $categoryKey => $categoryValue){
-            if(in_array($categoryValue,$categories))  continue;
-            else unset($decodeArray['categories'][$categoryKey]);
-        }
-        foreach($decodeArray['types'] as $typeKey => $typeValue){
-            if(in_array($typeValue,$types))  continue;
-            else unset($decodeArray['types'][$typeKey]);
-        }
-        return $decodeArray;
     }
     public static function decodeEvent($matchName, $requirement)
     {
