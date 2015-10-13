@@ -10,8 +10,8 @@
                         height:19.5cm
         ">
             <div class="row" style="margin-bottom: 0px">
-                <div class="col s2" style="margin-top: 15px;">
-                    <img src="{{ url('images/mra_logo.jpg') }}" alt="MRA Logo">
+                <div class="col s2" style="margin-top: 30px;">
+                    <img src="{{ url('images/mra_logo.jpg') }}" alt="MRA Logo" height="90px">
                 </div>
                 <div class="col s10">
                     <h3 class="center">Maharashtra Rifle Association</h3>
