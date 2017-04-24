@@ -1,0 +1,63 @@
+id,match_id,name,class,type,gender,category,isDecimal,max_score,created_at,updated_at
+1,1,Z-01,50M Rifle Prone,NR,Men,Senior,0,NULL,01/04/2015,01/04/2015
+2,1,Z-02,50M Rifle Prone,NR,Men,Services,0,NULL,01/04/2015,01/04/2015
+3,1,Z-03,50M Rifle Prone,NR,Women,Senior,0,NULL,01/04/2015,01/04/2015
+4,1,Z-04,50M Rifle Prone,NR,Men,Junior,0,NULL,01/04/2015,01/04/2015
+5,1,Z-05,50M Rifle Prone,NR,Men,Junior Services,0,NULL,01/04/2015,01/04/2015
+6,1,Z-06,50M Rifle Prone,NR,Women,Junior,0,NULL,01/04/2015,01/04/2015
+7,1,Z-07,50M Rifle Prone,NR,Men,Handicapped,0,NULL,01/04/2015,01/04/2015
+8,1,Z-08,50M Rifle Prone,NR,Women,Handicapped,0,NULL,01/04/2015,01/04/2015
+9,1,Z-09,50M Rifle Prone,NR,Men,Veterans,0,NULL,01/04/2015,01/04/2015
+10,1,Z-10,50M Rifle Prone,NR,Women,Veterans,0,NULL,01/04/2015,01/04/2015
+11,1,Z-11,Small Bore Free/Sport Rifle Prone (NR) 50M,NR,Common,MQS,0,NULL,01/04/2015,01/04/2015
+12,1,Z-12,50M Rifle 3 Position,NR,Men,Senior,0,NULL,01/04/2015,01/04/2015
+13,1,Z-13,50M Rifle 3 Position,NR,Men,Services,0,NULL,01/04/2015,01/04/2015
+14,1,Z-14,50M Rifle 3 Position,NR,Women,Senior,0,NULL,01/04/2015,01/04/2015
+15,1,Z-15,50M Rifle 3 Position,NR,Men,Junior,0,NULL,01/04/2015,01/04/2015
+16,1,Z-16,50M Rifle 3 Position,NR,Men,Junior Services,0,NULL,01/04/2015,01/04/2015
+17,1,Z-17,50M Rifle 3 Position,NR,Women,Junior,0,NULL,01/04/2015,01/04/2015
+18,1,Z-18,Small Bore Free/Sport Rifle Three Position (NR) 50M,NR,Common,MQS,0,NULL,01/04/2015,01/04/2015
+19,1,Z-19,10M Rifle,NR,Men,Senior,0,NULL,01/04/2015,01/04/2015
+20,1,Z-20,10M Rifle,NR,Men,Services,0,NULL,01/04/2015,01/04/2015
+21,1,Z-21,10M Rifle,NR,Women,Senior,0,NULL,01/04/2015,01/04/2015
+22,1,Z-22,10M Rifle,NR,Men,Junior,0,NULL,01/04/2015,01/04/2015
+23,1,Z-23,10M Rifle,NR,Men,Junior Services,0,NULL,01/04/2015,01/04/2015
+24,1,Z-24,10M Rifle,NR,Women,Junior,0,NULL,01/04/2015,01/04/2015
+25,1,Z-25,10M Rifle,NR,Men,Youth,0,NULL,01/04/2015,01/04/2015
+26,1,Z-26,10M Rifle,NR,Women,Youth,0,NULL,01/04/2015,01/04/2015
+27,1,Z-27,10M Rifle,NR,Men,Veterans,0,NULL,01/04/2015,01/04/2015
+28,1,Z-28,10M Rifle,NR,Men,Handicapped,0,NULL,01/04/2015,01/04/2015
+29,1,Z-29,10M Rifle,NR,Women,Handicapped,0,NULL,01/04/2015,01/04/2015
+30,1,Z-30,10M Rifle,NR,Common,MQS,0,NULL,01/04/2015,01/04/2015
+31,1,Z-31,25M Center Fire Pistol,NR,Men,Senior,0,NULL,01/04/2015,01/04/2015
+32,1,Z-32,25M Center Fire Pistol,NR,Men,Services,0,NULL,01/04/2015,01/04/2015
+33,1,Z-33,25M Center Fire Pistol,NR,Men,Junior,0,NULL,01/04/2015,01/04/2015
+34,1,Z-34,25M Center Fire Pistol,NR,Men,Junior Services,0,NULL,01/04/2015,01/04/2015
+35,1,Z-35,25M Center Fire Pistol,NR,Common,MQS,0,NULL,01/04/2015,01/04/2015
+36,1,Z-36,25M Sports Pistol,NR,Women,Senior,0,NULL,01/04/2015,01/04/2015
+37,1,Z-37,25M Sports Pistol,NR,Women,Junior,0,NULL,01/04/2015,01/04/2015
+38,1,Z-38,25M Sports Pistol,NR,Men,Junior,0,NULL,01/04/2015,01/04/2015
+39,1,Z-39,25M Sports Pistol,NR,Men,Junior Services,0,NULL,01/04/2015,01/04/2015
+40,1,Z-40,25M Sports Pistol,NR,Common,MQS,0,NULL,01/04/2015,01/04/2015
+41,1,Z-41,25M Standard Pistol,NR,Men,Senior,0,NULL,01/04/2015,01/04/2015
+42,1,Z-42,25M Standard Pistol,NR,Men,Services,0,NULL,01/04/2015,01/04/2015
+43,1,Z-43,25M Standard Pistol,NR,Men,Junior,0,NULL,01/04/2015,01/04/2015
+44,1,Z-44,25M Standard Pistol,NR,Men,Junior Services,0,NULL,01/04/2015,01/04/2015
+45,1,Z-45,25M Standard Pistol,NR,Common,MQS,0,NULL,01/04/2015,01/04/2015
+46,1,Z-46,50M Pistol,NR,Men,Senior,0,NULL,01/04/2015,01/04/2015
+47,1,Z-47,50M Pistol,NR,Men,Services,0,NULL,01/04/2015,01/04/2015
+48,1,Z-48,50M Pistol,NR,Men,Junior,0,NULL,01/04/2015,01/04/2015
+49,1,Z-49,50M Pistol,NR,Men,Junior Services,0,NULL,01/04/2015,01/04/2015
+50,1,Z-50,50M Pistol,NR,Common,MQS,0,NULL,01/04/2015,01/04/2015
+51,1,Z-51,10M Pistol,NR,Men,Senior,0,NULL,01/04/2015,01/04/2015
+52,1,Z-52,10M Pistol,NR,Men,Services,0,NULL,01/04/2015,01/04/2015
+53,1,Z-53,10M Pistol,NR,Women,Senior,0,NULL,01/04/2015,01/04/2015
+54,1,Z-54,10M Pistol,NR,Men,Junior,0,NULL,01/04/2015,01/04/2015
+55,1,Z-55,10M Pistol,NR,Men,Junior Services,0,NULL,01/04/2015,01/04/2015
+56,1,Z-56,10M Pistol,NR,Women,Junior,0,NULL,01/04/2015,01/04/2015
+57,1,Z-57,10M Pistol,NR,Men,Youth,0,NULL,01/04/2015,01/04/2015
+58,1,Z-58,10M Pistol,NR,Women,Youth,0,NULL,01/04/2015,01/04/2015
+59,1,Z-59,10M Pistol,NR,Men,Handicapped,0,NULL,01/04/2015,01/04/2015
+60,1,Z-60,10M Pistol,NR,Women,Handicapped,0,NULL,01/04/2015,01/04/2015
+61,1,Z-61,10M Pistol,NR,Men,Veterans,0,NULL,01/04/2015,01/04/2015
+62,1,Z-62,10M Pistol,NR,Common,MQS,0,NULL,01/04/2015,01/04/2015

@@ -169,7 +169,7 @@ class relayController extends Controller
                 //$relayInfo[$relayNo] will give all info about relay
         }
         //
-        return view('relay.showRelays',compact('athletes','relayInfo','class','gender'));
+        //return view('relay.showRelays',compact('athletes','relayInfo','class','gender'));
         $pdf = \PDF::loadView('relay.showRelays',compact('athletes','relayInfo','class','gender'))->setPaper('a4')->setOrientation('portrait')->setOption('margin-bottom', 0)->download('download.pdf');
         return $pdf;
     }

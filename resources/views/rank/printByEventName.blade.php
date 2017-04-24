@@ -18,6 +18,7 @@
             </thead>
         @endif
             <tbody>
+                @if($details->score > 0)
                 <tr>
                     <td>{{$rank}}</td>
                     <td>{{$details->athlete_id}}</td>
@@ -25,6 +26,7 @@
                     <td>{{$details->abbreviation}}</td>
                     <td>{{$details->score}}</td>
                 </tr>
+                @endif
             </tbody>
         </table>
         @if($rank %18 == 0)</div>@endif
